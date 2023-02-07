@@ -18,30 +18,31 @@ export class NextJsAppStack extends cdk.Stack {
         },
       }),
     });
-    // new codeBuild.Project(this, "AppBuilder", {
-    //   projectName: "AppBuilder",
-    //   source: codeBuild.Source.gitHub({
-    //     owner: config.app_repo.owner,
-    //     repo: config.app_repo.name,
-    //     webhook: true,
-    //     webhookTriggersBatchBuild: true,
-    //     webhookFilters: [
-    //       codeBuild.FilterGroup.inEventOf(
-    //         codeBuild.EventAction.PUSH
-    //       ).andBranchIs("master"),
-    //     ],
-    //   }),
-    //   buildSpec: codeBuild.BuildSpec.fromObject({
-    //     version: "0.1",
-    //     phases: {
-    //       build: {
-    //         commands: [
-    //           "yarn install --prefer-offline --frozen-lockfile --non-interactive --production=false",
-    //           "yarn build",
-    //         ],
-    //       },
-    //     },
-    //   }),
-    // });
+
+    new codeBuild.Project(this, "AppBuilder", {
+      projectName: "AppBuilder",
+      source: codeBuild.Source.gitHub({
+        owner: config.app_repo.owner,
+        repo: config.app_repo.name,
+        webhook: true,
+        webhookTriggersBatchBuild: true,
+        webhookFilters: [
+          codeBuild.FilterGroup.inEventOf(
+            codeBuild.EventAction.PUSH
+          ).andBranchIs("master"),
+        ],
+      }),
+      buildSpec: codeBuild.BuildSpec.fromObject({
+        version: "0.1",
+        phases: {
+          build: {
+            commands: [
+              "yarn install --prefer-offline --frozen-lockfile --non-interactive --production=false",
+              "yarn build",
+            ],
+          },
+        },
+      }),
+    });
   }
 }
