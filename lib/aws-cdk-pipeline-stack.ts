@@ -15,9 +15,12 @@ export class AwsCdkPipelineStack extends cdk.Stack {
     new CodePipeline(this, "Pipeline", {
       pipelineName: "AWS-CDK-Pipeline",
       synth: new ShellStep("Synth", {
-        input: CodePipelineSource.gitHub(
-          `${config.infra_repo.name}/${config.infra_repo}`,
-          "main"
+        input: CodePipelineSource.connection(
+          `${config.infra_repo.owner}/${config.infra_repo.name}`,
+          "main",
+          {
+            connectionArn: config.aws.github_connection_arn,
+          }
         ),
         commands: ["yarn", "yarn build", "npx cdk synth"],
       }),

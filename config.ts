@@ -5,6 +5,7 @@ dotenv.config();
 const config = {
   aws: {
     account_id: process.env.AWS_ACCOUNT_ID || "",
+    github_connection_arn: process.env.AWS_GITHUB_CONNECTION_ARN || "",
     region: {
       az1: process.env.AWS_REGION_AZ1 || "",
     },
