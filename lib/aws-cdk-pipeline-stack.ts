@@ -13,7 +13,7 @@ export class AwsCdkPipelineStack extends cdk.Stack {
     super(scope, id, props);
 
     new CodePipeline(this, "Pipeline", {
-      pipelineName: "Nextjs-App-Pipeline",
+      pipelineName: "AWS-CDK-Pipeline",
       synth: new ShellStep("Synth", {
         input: CodePipelineSource.gitHub(
           `${config.infra_repo.name}/${config.infra_repo}`,
