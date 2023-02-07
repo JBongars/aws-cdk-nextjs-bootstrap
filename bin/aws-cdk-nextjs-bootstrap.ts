@@ -7,7 +7,7 @@ import { NextJsAppStack } from "../lib/nextjs-app-stack";
 
 const app = new cdk.App();
 
-new AwsCdkPipelineStack(app, "AppPipelineStack", {
+new AwsCdkPipelineStack(app, "AppBootstrapStack", {
   env: {
     account: config.aws.account_id,
     region: config.aws.region.az1,
